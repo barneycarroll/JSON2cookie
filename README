@@ -1,0 +1,25 @@
+JSON-format objects saved and retrieved in document.cookie, 
+using a global (namespace as desired) prefs object.
+
+This is a modified version of code ripped off of Stoyan Stefanov.
+
+Example usage, for a theoretical web UI preferences object:
+
+prefs.load();
+prefs.data.GUI = {sidebar:{collapsed:true},};
+prefs.save();
+
+window.onload = function initGUI(){
+	prefs.load();
+	if(prefs.data.GUI.sidebar.collapsed){
+		$sidebar.classList.add('collapsed');
+	}
+	
+	var sidebarExpand = function(){
+		prefs.load();
+		prefs.data.GUI.sidebar.collapsed = false;
+		prefs.save();
+		
+		$sidebar.classList.remove('collapsed');
+	}
+}
